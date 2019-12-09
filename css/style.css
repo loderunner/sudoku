@@ -1,0 +1,58 @@
+body {
+  margin: 40px;
+  font-family: "Gloria Hallelujah", cursive;
+}
+
+.grid {
+  display: grid;
+  width: calc(var(--blockCols) * var(--blockRows) * 100px);
+  height: calc(var(--blockRows) * var(--blockCols) * 100px);
+  grid-template-columns: repeat(calc(var(--blockRows) * var(--blockCols)), 1fr);
+  grid-template-rows: repeat(calc(var(--blockRows) * var(--blockCols)), 1fr);
+}
+
+.cell {
+  display: flex;
+  padding: 20px;
+  font-size: 150%;
+  justify-content: center;
+  align-items: center;
+  border-top: #c0c0c0 solid 1px;
+  border-left: #c0c0c0 solid 1px;
+}
+
+.cell.first-row-block {
+  border-top: #000000 solid 2px;
+}
+
+.cell.first-col-block {
+  border-left: #000000 solid 2px;
+}
+
+.cell.first-row-grid {
+  border-top: #000000 solid 3px;
+}
+
+.cell.first-col-grid {
+  border-left: #000000 solid 3px;
+}
+
+.cell.last-row-grid {
+  border-bottom: #000000 solid 3px;
+}
+
+.cell.last-col-grid {
+  border-right: #000000 solid 3px;
+}
+
+.cell.removing {
+  background-color: #20b2aa;
+}
+
+.cell.solving {
+  background-color: #bc8f8f;
+}
+
+.cell.solved {
+  transition-duration: 0.5s;
+}
