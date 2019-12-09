@@ -5,7 +5,12 @@ function nearestFactors(n) {
 }
 
 function shuffle(a) {
-  a.sort(() => Math.random() - 0.5);
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * i);
+    const tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
+  }
 }
 
 function randomRow(n) {
