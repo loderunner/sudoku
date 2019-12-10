@@ -1,10 +1,10 @@
 const size = 9;
 const s = new Sudoku(size);
 
-const table = document.createElement("div");
-table.style.setProperty("--blockRows", s.blockHeight);
-table.style.setProperty("--blockCols", s.blockWidth);
-table.classList.add("grid");
+const grid = document.getElementById("grid");
+grid.style.setProperty("--blockRows", s.blockHeight);
+grid.style.setProperty("--blockCols", s.blockWidth);
+grid.classList.add("grid");
 for (let row = 0; row < size; row++) {
   for (let col = 0; col < size; col++) {
     const cell = document.createElement("div");
@@ -34,11 +34,9 @@ for (let row = 0; row < size; row++) {
     if ((col + 1) % s.blockWidth === 0) {
       cell.classList.add("last-col-block");
     }
-    table.appendChild(cell);
+    grid.appendChild(cell);
   }
 }
-
-document.body.appendChild(table);
 
 function displayTable() {
   for (let row = 0; row < size; row++) {
@@ -56,7 +54,6 @@ function next(cb) {
 }
 
 let g = s.generateGrid();
-let generatedGrid, solvedGrid;
 
 function gridGenerationStep() {
   const { value, done } = g.next();
@@ -66,8 +63,7 @@ function gridGenerationStep() {
     cell.innerText = n === 0 ? "" : n;
     next(gridGenerationStep);
   } else {
-    generatedGrid = s.grid.slice();
-    g = s.generatePuzzle(30);
+    g = s.generatePuzzle(40);
     next(puzzleGenerationStep);
   }
 }
@@ -121,13 +117,6 @@ function solveStep() {
     }
     cell.innerText = n === 0 ? "" : n;
     next(solveStep);
-  } else {
-    solvedGrid = s.grid.slice();
-    for (let i = 0; i < generatedGrid.length; i++) {
-      if (generatedGrid[i] !== solvedGrid[i]) {
-        throw new Error("Solution differs from puzzle");
-      }
-    }
   }
 }
 
